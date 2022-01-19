@@ -47,7 +47,7 @@ class RadioTest {
     @CsvFileSource(resources = "/data4.csv")
     void shouldSetCurrentVolume(String test, int currentVolume, int expected) {
         Radio radio = new Radio();
-        radio.setCurrentStation(currentVolume);
+        radio.setCurrentVolume(currentVolume);
 
         int actual = radio.getCurrentVolume();
 
