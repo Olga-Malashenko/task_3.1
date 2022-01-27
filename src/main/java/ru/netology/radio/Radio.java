@@ -4,8 +4,12 @@ public class Radio {
 
     private int currentStation;                     // Поля
     private int numberOfStations = 10;
-    private int maxStation = numberOfStations - 1; // не понимаю пока,
-    // куда эту строчку воткнуть, чтоб не дублировать
+    private final int minStation = 0;
+    private int maxStation = numberOfStations - 1;
+
+    private int currentVolume;
+    private final int minVolute = 0;
+    private final int maxVolume = 100;
 
 
     public Radio() {                            //  Конструкторы
@@ -30,16 +34,16 @@ public class Radio {
     }
 
 
-    public void setToMaxStation(int maxStation) {
-        this.currentStation = maxStation;
-    }
+//    public void setToMaxStation(int maxStation) {
+//        this.currentStation = maxStation;
+//    }
 
 //    public int getToMaxStation() {
 //        return maxStation;
 //    }
 
     public void setCurrentStation(int currentStation) {
-        if (currentStation < 0) {
+        if (currentStation < minStation) {
             return;
         }
         if (currentStation > maxStation) {
@@ -57,47 +61,45 @@ public class Radio {
             this.currentStation += 1;
             return;
         }
-        this.currentStation = 0;
+        this.currentStation = minStation;
     }
 
     public void setToPrevStation() {
-        if (currentStation > 0) {
+        if (currentStation > minStation) {
             this.currentStation -= 1;
             return;
         }
         this.currentStation = maxStation;
     }
 
-//    private int currentVolume;
-//
-//    public int getCurrentVolume() {
-//        return currentVolume;
-//    }
-//
-//    public void setCurrentVolume(int currentVolume) {
-//        if (currentVolume < 0) {
-//            return;
-//        }
-//        if (currentVolume > 10) {
-//            return;
-//        }
-//        this.currentVolume = currentVolume;
-//    }
-//    // В задании нет этого метода,
-//    // но я пришла к выводу, что он нобходим. Ход мыслей к комментариях к тесту.
-//    // Правильные ли там рассуждения, или я до чего-то не додумалась?
-//
-//    public void increaseVolume() {
-//        if (currentVolume == 10) {
-//            return;
-//        }
-//        this.currentVolume += 1;
-//    }
-//
-//    public void decreaseVolume() {
-//        if (currentVolume == 0) {
-//            return;
-//        }
-//        this.currentVolume -= 1;
-//    }
+
+
+    public int getCurrentVolume() {
+        return currentVolume;
+    }
+
+    public void setCurrentVolume(int currentVolume) {  // метод нужен для тестирования
+        if (currentVolume < minVolute) {
+            return;
+        }
+        if (currentVolume > maxVolume) {
+            return;
+        }
+        this.currentVolume = currentVolume;
+    }
+
+
+    public void increaseVolume() {
+        if (currentVolume == maxVolume ) {
+            return;
+        }
+        this.currentVolume += 1;
+    }
+
+    public void decreaseVolume() {
+        if (currentVolume == minVolute) {
+            return;
+        }
+        this.currentVolume -= 1;
+    }
 }
