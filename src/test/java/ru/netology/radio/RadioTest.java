@@ -10,17 +10,12 @@ class RadioTest {
 
     @ParameterizedTest
     @CsvFileSource(resources = "/dataStationsNumber.csv")
-    void shouldUseConstructer(String test, int maxStationsNumber, int expected) {
-        Radio radio = new Radio(maxStationsNumber);
-        //int maxStation = maxStationsNumber - 1; // мне не нравится, что я дублирую логику
-        radio.setToMaxStation(maxStationsNumber);
-
-        int actual = radio.getToMaxStation();
-
+    void shouldUseConstructer(String test, int numberOfStations, int expected) {
+        Radio radio = new Radio(numberOfStations);
+        radio.setNumberOfStations(numberOfStations);
+        int actual = radio.getNumberOfStations();
         assertEquals(expected, actual);
     }
-
-
 
     @ParameterizedTest
     @CsvFileSource(resources = "/data1.csv")
@@ -32,37 +27,61 @@ class RadioTest {
     }
     @ParameterizedTest
     @CsvFileSource(resources = "/data1-2.csv")
-    void shouldSetCurrentStationForSetting(String test, int currentStation, int expected, int maxStationsNumber) {
-        Radio radio = new Radio(maxStationsNumber);
+    void shouldSetCurrentStationForSetting(String test, int numberOfStations, int currentStation, int expected) {
+        Radio radio = new Radio(numberOfStations);
         radio.setCurrentStation(currentStation);
         int actual = radio.getCurrentStation();
         assertEquals(expected, actual);
     }
 
-//    @ParameterizedTest
-//    @CsvFileSource(resources = "/data2.csv")
-//    void shouldSetToNextStation(String test, int currentStation, int expected) {
-//        Radio radio = new Radio();
-//        radio.setCurrentStation(currentStation);
-//        radio.setToNextStation();
-//
-//        int actual = radio.getCurrentStation();
-//
-//        assertEquals(expected, actual);
-//    }
-//
-//    @ParameterizedTest
-//    @CsvFileSource(resources = "/data3.csv")
-//    void setToPrevStation(String test, int currentStation, int expected) {
-//        Radio radio = new Radio();
-//        radio.setCurrentStation(currentStation);
-//        radio.setToPrevStation();
-//
-//        int actual = radio.getCurrentStation();
-//
-//        assertEquals(expected, actual);
-//    }
-//
+    @ParameterizedTest
+    @CsvFileSource(resources = "/data2.csv")
+    void shouldSetToNextStationForDefolt(String test, int currentStation, int expected) {
+        Radio radio = new Radio();
+        radio.setCurrentStation(currentStation);
+        radio.setToNextStation();
+
+        int actual = radio.getCurrentStation();
+
+        assertEquals(expected, actual);
+    }
+
+    @ParameterizedTest
+    @CsvFileSource(resources = "/data2-2.csv")
+    void shouldSetToNextStationForSetting(String test, int numberOfStation, int currentStation, int expected) {
+        Radio radio = new Radio(numberOfStation);
+        radio.setCurrentStation(currentStation);
+        radio.setToNextStation();
+
+        int actual = radio.getCurrentStation();
+
+        assertEquals(expected, actual);
+    }
+
+    @ParameterizedTest
+    @CsvFileSource(resources = "/data3.csv")
+    void setToPrevStationForDefolt(String test, int currentStation, int expected) {
+        Radio radio = new Radio();
+        radio.setCurrentStation(currentStation);
+        radio.setToPrevStation();
+
+        int actual = radio.getCurrentStation();
+
+        assertEquals(expected, actual);
+    }
+
+    @ParameterizedTest
+    @CsvFileSource(resources = "/data3-3.csv")
+    void setToPrevStationForSetting(String test, int numberOfStation, int currentStation, int expected) {
+        Radio radio = new Radio(numberOfStation);
+        radio.setCurrentStation(currentStation);
+        radio.setToPrevStation();
+
+        int actual = radio.getCurrentStation();
+
+        assertEquals(expected, actual);
+    }
+
 //    @ParameterizedTest
 //    @CsvFileSource(resources = "/data4.csv")
 //    void shouldSetCurrentVolume(String test, int currentVolume, int expected) {

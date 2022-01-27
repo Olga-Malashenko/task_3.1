@@ -1,4 +1,7 @@
-"Station into diapason",54,54,55
-"Station minimum",0,0,1
-"Station maximum",99,99,100
-"Station under diapason",-1,0,-1
+"Station into diapason",100,54,54
+"Station over diapason",100,100,0
+"Station out diapason",50,55,0
+"Station minimum",50,0,0
+"Station maximum",50,49,49
+"Station under diapason",100,-1,0
+

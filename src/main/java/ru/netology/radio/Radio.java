@@ -2,28 +2,41 @@ package ru.netology.radio;
 
 public class Radio {
 
-    private int currentStation;
-    private int maxStationsNumber = 10;
-    private int maxStation = maxStationsNumber - 1; // не понимаю пока,
+    private int currentStation;                     // Поля
+    private int numberOfStations = 10;
+    private int maxStation = numberOfStations - 1; // не понимаю пока,
     // куда эту строчку воткнуть, чтоб не дублировать
 
-    public Radio(int maxStationsNumber) {
-        this.maxStationsNumber = maxStationsNumber;
-    }
-    public Radio() {
+
+    public Radio() {                            //  Конструкторы
     }
 
-    public int getToMaxStation() {
-        return maxStation;
+    public Radio(int numberOfStations) {
+        this.numberOfStations = numberOfStations;
+        this.maxStation = numberOfStations - 1;
     }
+
+
+    public void setNumberOfStations(int numberOfStations) {             // Методы
+        if (numberOfStations <= 0) {
+            this.numberOfStations = 10; // устанавливаем на этот случай дефолтное значение
+            return;
+        }
+        this.numberOfStations = numberOfStations ;
+    }
+
+    public int getNumberOfStations() {
+        return numberOfStations;
+    }
+
 
     public void setToMaxStation(int maxStation) {
-        this.maxStation = maxStation;
+        this.currentStation = maxStation;
     }
 
-    public int getCurrentStation() {
-        return currentStation;
-    }
+//    public int getToMaxStation() {
+//        return maxStation;
+//    }
 
     public void setCurrentStation(int currentStation) {
         if (currentStation < 0) {
@@ -35,21 +48,26 @@ public class Radio {
         this.currentStation = currentStation;
     }
 
-//    public void setToNextStation() {
-//        if (currentStation < 9) {
-//            this.currentStation += 1;
-//            return;
-//        }
-//        this.currentStation = 0;
-//    }
-//
-//    public void setToPrevStation() {
-//        if (currentStation > 0) {
-//            this.currentStation -= 1;
-//        }
-//        else this.currentStation = 9;
-//    }
-//
+    public int getCurrentStation() {
+        return currentStation;
+    }
+
+    public void setToNextStation() {
+        if (currentStation < maxStation) {
+            this.currentStation += 1;
+            return;
+        }
+        this.currentStation = 0;
+    }
+
+    public void setToPrevStation() {
+        if (currentStation > 0) {
+            this.currentStation -= 1;
+            return;
+        }
+        this.currentStation = maxStation;
+    }
+
 //    private int currentVolume;
 //
 //    public int getCurrentVolume() {
