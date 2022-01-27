@@ -1,0 +1,5 @@
+"StationsNumber into diapason",50,50
+"StationsNumber minimum",1,1
+"StationsNumber maximum",100,100
+"StationsNumber pre-minimum",0,10
+"StationsNumberUnpossible",-2,10

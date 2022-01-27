@@ -9,19 +9,34 @@ import static org.junit.jupiter.api.Assertions.*;
 class RadioTest {
 
     @ParameterizedTest
+    @CsvFileSource(resources = "/dataStationsNumber.csv")
+    void shouldUseConstructer(String test, int numberOfStations, int expected) {
+        Radio radio = new Radio(numberOfStations);
+        radio.setNumberOfStations(numberOfStations);
+        int actual = radio.getNumberOfStations();
+        assertEquals(expected, actual);
+    }
+
+    @ParameterizedTest
     @CsvFileSource(resources = "/data1.csv")
-    void shouldSetCurrentStation(String test, int currentStation, int expected) {
+    void shouldSetCurrentStationForDefolt(String test, int currentStation, int expected) {
         Radio radio = new Radio();
         radio.setCurrentStation(currentStation);
-
         int actual = radio.getCurrentStation();
-
+        assertEquals(expected, actual);
+    }
+    @ParameterizedTest
+    @CsvFileSource(resources = "/data1-2.csv")
+    void shouldSetCurrentStationForSetting(String test, int numberOfStations, int currentStation, int expected) {
+        Radio radio = new Radio(numberOfStations);
+        radio.setCurrentStation(currentStation);
+        int actual = radio.getCurrentStation();
         assertEquals(expected, actual);
     }
 
     @ParameterizedTest
     @CsvFileSource(resources = "/data2.csv")
-    void shouldSetToNextStation(String test, int currentStation, int expected) {
+    void shouldSetToNextStationForDefolt(String test, int currentStation, int expected) {
         Radio radio = new Radio();
         radio.setCurrentStation(currentStation);
         radio.setToNextStation();
@@ -32,9 +47,33 @@ class RadioTest {
     }
 
     @ParameterizedTest
+    @CsvFileSource(resources = "/data2-2.csv")
+    void shouldSetToNextStationForSetting(String test, int numberOfStation, int currentStation, int expected) {
+        Radio radio = new Radio(numberOfStation);
+        radio.setCurrentStation(currentStation);
+        radio.setToNextStation();
+
+        int actual = radio.getCurrentStation();
+
+        assertEquals(expected, actual);
+    }
+
+    @ParameterizedTest
     @CsvFileSource(resources = "/data3.csv")
-    void setToPrevStation(String test, int currentStation, int expected) {
+    void setToPrevStationForDefolt(String test, int currentStation, int expected) {
         Radio radio = new Radio();
+        radio.setCurrentStation(currentStation);
+        radio.setToPrevStation();
+
+        int actual = radio.getCurrentStation();
+
+        assertEquals(expected, actual);
+    }
+
+    @ParameterizedTest
+    @CsvFileSource(resources = "/data3-3.csv")
+    void setToPrevStationForSetting(String test, int numberOfStation, int currentStation, int expected) {
+        Radio radio = new Radio(numberOfStation);
         radio.setCurrentStation(currentStation);
         radio.setToPrevStation();
 
